@@ -4,6 +4,7 @@ resource "aws_instance" "my_webserver" {
   ami = "ami-089b5384aac360007" # Amazon Linux AMI
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.my_webserver.id]
+  key_name      = "key_makentosh"
   user_data = templatefile("user_data.sh.tpl", {
     f_name = "Nikita",
     l_name = "Olefir",

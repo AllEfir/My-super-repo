@@ -5,7 +5,6 @@ yum -y install httpd
 myip=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
 
 cat <<EOF > /var/www/html/index.html
-
 <!DOCTYPE html>
 <html lang="ua">
 <head>
@@ -62,7 +61,7 @@ cat <<EOF > /var/www/html/index.html
         <li>
             Релігія
             <ul>
-                <li>Православ`я</li>
+                <li>Православ'я</li>
             </ul>
         </li>
         <li>
@@ -108,7 +107,7 @@ cat <<EOF > /var/www/html/index.html
 </html>
 EOF
 
-sudo service httpd start
+service httpd start
 chkconfig httpd on
 cat netumenya.txt
 echo "UserData executed on $ (date)" >> /var/www/html/log.txt
