@@ -4,7 +4,7 @@ yum -y update
 yum -y install httpd
 myip=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
 
-cat <<EOF > /var/www/index.html
+cat <<EOF > /var/www/html/index.html
 
 <!DOCTYPE html>
 <html lang="ua">
@@ -111,5 +111,5 @@ EOF
 sudo service httpd start
 chkconfig httpd on
 cat netumenya.txt
-cho "UserData executed on $ (date)" >> /var/www/html/log.txt
+echo "UserData executed on $ (date)" >> /var/www/html/log.txt
 echo "-----------FINISH----------"
