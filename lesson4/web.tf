@@ -1,13 +1,14 @@
  provider "aws" {}
 
 resource "aws_instance" "my_webserver" {
-  ami = "ami-0ab4d1e9cf9a1215a" # Amazon Linux AMI
+  ami = "ami-089b5384aac360007" # Amazon Linux AMI
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.my_webserver.id]
+  key_name      = "key_makentosh"
   user_data = templatefile("user_data.sh.tpl", {
     f_name = "Nikita",
     l_name = "Olefir",
-    names = ["vasya","kolya","john",  "donald", "maksim"]
+    names = ["vasya", "kolya", "john", "donald", "maksim"]
   })
 
 }
@@ -27,6 +28,13 @@ resource "aws_security_group" "my_webserver" {
     description      = "HTTPS"
     from_port        = 443
     to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+  ingress {
+    description      = "SSH"
+    from_port        = 22
+    to_port          = 22
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }

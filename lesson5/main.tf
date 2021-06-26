@@ -1,22 +1,13 @@
-provider "aws" {}
-
 resource "aws_instance" "my_webserver" {
   ami = "ami-089b5384aac360007" # Amazon Linux AMI
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.my_webserver.id]
-  user_data = <<EOF
-#!/bin/bash
-echo "------------------START------------------"
-yum -y update
-yum -y install httpd
-echo "<html><body bgcolor=vlack><center><h2><p><font color=red>Hello 4uvaki</h2></center></body></html>" > /var/www/html/index.html
-sudo service httpd start
-chkconfig httpd on
-cat netumenya.txt
-cho "UserData executed on $ (date)" >> /var/www/html/log.txt
-echo "-----------FINISH----------"
-EOF
-
+  key_name      = "key_makentosh"
+  user_data = templatefile("user_data.sh.tpl", {
+    f_name = "Nikita",
+    l_name = "Olefir",
+    names = ["vasya", "kolya", "john", "donald", "maksim"]
+  })
 
 }
 
@@ -38,6 +29,13 @@ resource "aws_security_group" "my_webserver" {
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
+  ingress {
+    description      = "SSH"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
 
   egress {
     from_port        = 0
@@ -48,5 +46,6 @@ resource "aws_security_group" "my_webserver" {
 
   tags = {
     Name = "allow_tls"
+    Region = var.aws_region
   }
 }
