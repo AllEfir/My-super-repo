@@ -7,6 +7,15 @@ resource "aws_instance" "redis" {
   vpc_security_group_ids = [data.aws_security_group.sg.id]
   subnet_id = data.aws_subnet.subnet.id
   tags = merge(var.common_tags, { name = "DBredis"})
+  user_data = <<EOF
+#!/bin/bash
+echo "--START--"
+yum -y update
+echo "--install redis--"
+amazon-linux-extras -y install redis
+systemctl start redis.service
+systemctl enable redis.service
+EOF
 }
 
 data "aws_security_group" "sg" {
