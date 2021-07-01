@@ -59,5 +59,8 @@ resource "aws_security_group" "sgr" {
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
   }
+  tags = {
+    name = "securitygroup"
+  }
 }
 
