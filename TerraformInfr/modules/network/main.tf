@@ -41,7 +41,7 @@ resource "aws_subnet" "subnet" {
 
 }
 resource "aws_security_group" "sgr" {
-  Name = "redis and nginx"
+  name = "redis and nginx"
   vpc_id = aws_vpc.VirtualPrivateCloud.id
 
   ingress {
