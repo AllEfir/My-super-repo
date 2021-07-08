@@ -7,7 +7,9 @@ resource "aws_instance" "nginx" {
   vpc_security_group_ids = [data.aws_security_group.sg.id]
   subnet_id = data.aws_subnet.subnet.id
   key_name = "makentosh-key"
-  tags = merge(var.common_tags, { name = "nginx"})
+  tags = merge(var.common_tags, {
+    name = "nginx"
+    env  = var.envtag})
   provisioner "remote-exec" {
     inline = [
       "sudo yum -y update",
