@@ -12,7 +12,6 @@ variable "common_tags" {
   description = "common tags for res"
   type = map
   default = {
-    Env = var.envtag
     Owner = "Mykyta"
     Project = "Terraform infr"
 
