@@ -5,14 +5,14 @@ provider "aws" {
 resource "aws_vpc" "VirtualPrivateCloud" {
   cidr_block = "172.16.0.0/16"
   tags = {
-    name = "VirtualPrivateCloud"
+    Name = "VirtualPrivateCloud"
     CidrBlock = "172.16.1.0/24"
   }
 }
 resource "aws_internet_gateway" "gateway" {
   vpc_id = aws_vpc.VirtualPrivateCloud.id
   tags = {
-    name = "gateway"
+    Name = "gateway"
   }
 }
 resource "aws_route_table" "route" {
@@ -22,7 +22,7 @@ resource "aws_route_table" "route" {
     gateway_id = aws_internet_gateway.gateway.id
   }
   tags = {
-    name = "Route table"
+    Name = "Route table"
   }
 }
 resource "aws_route_table_association" "route_association" {
@@ -34,14 +34,14 @@ resource "aws_subnet" "subnet" {
   vpc_id = aws_vpc.VirtualPrivateCloud.id
   availability_zone = "eu-central-1a"
   tags = {
-    name = "subnet"
+    Name = "subnet"
     cidr_block = "172.16.1.0/24"
   }
   map_public_ip_on_launch = true
 
 }
 resource "aws_security_group" "sgr" {
-  name = "redis and nginx"
+  Name = "redis and nginx"
   vpc_id = aws_vpc.VirtualPrivateCloud.id
 
   ingress {
@@ -80,7 +80,7 @@ resource "aws_security_group" "sgr" {
     cidr_blocks      = ["0.0.0.0/0"]
   }
   tags = {
-    name = "securitygroup"
+    Name = "securitygroup"
   }
 }
 

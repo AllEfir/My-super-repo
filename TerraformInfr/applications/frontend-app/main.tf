@@ -8,7 +8,7 @@ resource "aws_instance" "nginx" {
   subnet_id = data.aws_subnet.subnet.id
   key_name = "makentosh-key"
   tags = merge(var.common_tags, {
-    name = "nginx"
+    Name = "nginx"
     env  = var.envtag})
   provisioner "remote-exec" {
     inline = [
@@ -28,12 +28,12 @@ resource "aws_instance" "nginx" {
 
 data "aws_security_group" "sg" {
   tags = {
-    name = "securitygroup"
+    Name = "securitygroup"
   }
 }
 data "aws_subnet" "subnet" {
   tags = {
-    name = "subnet"
+    Name = "subnet"
   }
 }
 /*resource "local_file" "region" {

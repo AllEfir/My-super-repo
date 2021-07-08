@@ -9,7 +9,7 @@ resource "aws_instance" "redis" {
   subnet_id = data.aws_subnet.subnet.id
   key_name = "makentosh-key"
   tags = merge(var.common_tags, {
-    name = "DBredis"
+    Name = "DBredis"
   })
 
   provisioner "remote-exec" {
@@ -29,11 +29,11 @@ resource "aws_instance" "redis" {
 }
 data "aws_security_group" "sg" {
   tags = {
-    name = "securitygroup"
+    Name = "securitygroup"
   }
 }
 data "aws_subnet" "subnet" {
   tags = {
-    name = "subnet"
+    Name = "subnet"
   }
 }

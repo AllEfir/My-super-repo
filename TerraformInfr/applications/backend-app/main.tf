@@ -8,7 +8,7 @@ resource "aws_instance" "django" {
   subnet_id = data.aws_subnet.subnet.id
   key_name = "makentosh-key"
   tags = merge(var.common_tags, {
-    name = "jango"
+    Name = "jango"
     env  = var.envtag})
 
   provisioner "remote-exec" {
@@ -33,12 +33,12 @@ resource "aws_instance" "django" {
 
 data "aws_security_group" "sg" {
   tags = {
-    name = "securitygroup"
+    Name = "securitygroup"
   }
 }
 data "aws_subnet" "subnet" {
   tags = {
-    name = "subnet"
+    Name = "subnet"
   }
 }
 /*resource "local_file" "region" {
