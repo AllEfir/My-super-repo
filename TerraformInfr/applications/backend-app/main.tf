@@ -1,16 +1,3 @@
-variable "region" {
-  default = "eu-central-1"
-  description = "select region"
-}
-variable "common_tags" {
-  description = "common tags for res"
-  type = map
-  default = {
-    Owner = "Mykyta"
-    Project = "Terraform infr"
-
-  }
-}
 provider "aws" {
   region = var.region
 }
@@ -19,27 +6,39 @@ resource "aws_instance" "django" {
   instance_type = "t2.micro"
   vpc_security_group_ids = [data.aws_security_group.sg.id]
   subnet_id = data.aws_subnet.subnet.id
-  tags = merge(var.common_tags, { name = "jango"})
-  user_data = <<EOF
-#!/bin/bash
-echo "--START--"
-yum -y update
-echo "--install epel and pip--"
-amazon-linux-extras install epel -y
-yum install python3-pip -y
-echo "--install django--"
-pip3 install django
-EOF
+  key_name = "makentosh-key"
+  tags = merge(var.common_tags, {
+    Name = "jango"
+    env  = var.envtag})
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo yum -y update",
+      "sudo amazon-linux-extras install epel -y",
+      "sudo yum install python3-pip -y",
+      "sudo amazon-linux-extras install epel -y",
+      "pip3 install django",
+      "sudo amazon-linux-extras install -y nginx1",
+      "sudo systemctl start nginx.service",
+      "sudo systemctl enable nginx.service",
+    ]
+  }
+  connection {
+    type = "ssh"
+    host = self.public_ip
+    user = "ec2-user"
+    private_key = var.aws_private_key
+  }
 }
 
 data "aws_security_group" "sg" {
   tags = {
-    name = "securitygroup"
+    Name = "securitygroup"
   }
 }
 data "aws_subnet" "subnet" {
   tags = {
-    name = "subnet"
+    Name = "subnet"
   }
 }
 /*resource "local_file" "region" {

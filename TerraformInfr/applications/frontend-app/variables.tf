@@ -1,14 +1,20 @@
-variable "aws_region" {
+variable "region" {
   default = "eu-central-1"
-  description = "Used region:"
+  description = "region"
+  type = string
 }
+variable "envtag" {
+  description = "env"
+  type = string
 
+}
 variable "common_tags" {
   description = "common tags for res"
   type = map
   default = {
     Owner = "Mykyta"
     Project = "Terraform infr"
+
 
   }
 }
