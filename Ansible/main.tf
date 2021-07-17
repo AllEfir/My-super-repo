@@ -6,7 +6,7 @@ resource "aws_instance" "ansible-master" {
   provisioner "remote-exec" {
     inline = [
       "sudo yum -y update",
-      "sudo yum install python3-pip -y",
+      "sudo yum install pip3 -y",
       "sudo pip install ansible -y",
     ]
   }
@@ -20,10 +20,10 @@ resource "aws_instance" "ansible-master" {
     Name = "ansible master client"
   }
 }
-/*resource "aws_instance" "ansible-client1" {
+resource "aws_instance" "ansible-client1" {
   ami = "ami-00f22f6155d6d92c5"
   instance_type = "t2.micro"
-  key_name = "key_makentosh"
+  key_name = "makentosh-key"
   vpc_security_group_ids = [aws_security_group.securitygroup.id]
   tags = {
     Name = "client for ansible1"
@@ -46,7 +46,7 @@ resource "aws_instance" "ansible-client3" {
   tags = {
     Name = "client for ansible3"
   }
-}*/
+}
 resource "aws_security_group" "securitygroup" {
   ingress {
     description      = "HTTP"
