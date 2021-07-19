@@ -1,0 +1,10 @@
+---
+- name: Install Nginx in prod server
+  hosts: all
+  become: yes
+
+  tasks:
+    
+    - name: install nginx
+      command: amazon-linux-extras install  nginx1
+     
