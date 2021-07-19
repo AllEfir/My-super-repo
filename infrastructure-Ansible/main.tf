@@ -13,8 +13,13 @@ resource "aws_instance" "ansible-master" {
       "sudo pip install ansible -y",
       "sudo echo ${var.aws_private_key} >> /home/ec2-user/.ssh/makentosh-key.pem ",
       "sudo chmod 400 /home/ec2-user/.ssh/makentosh-key.pem"
-
     ]
+  }
+  connection {
+    type = "ssh"
+    host = self.public_ip
+    user = "ec2-user"
+    private_key = var.aws_private_key
   }
 }
 /*resource "aws_instance" "nginx" {
