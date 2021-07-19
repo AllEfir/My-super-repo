@@ -10,8 +10,8 @@ resource "aws_instance" "ansible-master" {
     inline = [
       "sudo yum -y update",
       "sudo yum -y install python-pip",
-      "sudo pip install ansible -y",
-      "sudo echo ${var.aws_private_key} >> /home/ec2-user/.ssh/makentosh-key.pem ",
+      "sudo pip install ansible ",
+      "sudo echo '${var.aws_private_key}' >> /home/ec2-user/.ssh/makentosh-key.pem ",
       "sudo chmod 400 /home/ec2-user/.ssh/makentosh-key.pem"
     ]
   }
