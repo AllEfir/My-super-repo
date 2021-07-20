@@ -1,9 +1,9 @@
-output "ip-Ansible-master-private-ip" {
+/*output "ip-Ansible-master-private-ip" {
   value = aws_instance.ansible-master.private_ip
 }
 output "ip-Ansible-master-public-ip" {
   value = aws_instance.ansible-master.public_ip
-}
+}*/
 output "ip-nginx-private-ip" {
   value = aws_instance.nginx.private_ip
 }
