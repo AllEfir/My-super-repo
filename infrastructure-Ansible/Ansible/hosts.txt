@@ -1,0 +1,2 @@
+[prod_server]
+nginx1 ansible_host=18.195.215.73
