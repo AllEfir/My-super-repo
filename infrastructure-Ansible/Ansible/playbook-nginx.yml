@@ -25,9 +25,9 @@
     - name: copy conf.file nginx
       copy:
         src: /home/makentosh/Desktop/nginx.conf
-        dest: /etc/nginx/nginx.conf
+        dest: /etc/nginx/
       notify: Restart Nginx
-        
+
   handlers:
     - name: Restart Nginx
       service: name=nginx state=restarted
