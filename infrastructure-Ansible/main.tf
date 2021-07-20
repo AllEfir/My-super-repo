@@ -22,12 +22,16 @@ resource "aws_instance" "ansible-master" {
     private_key = var.aws_private_key
   }
 }
-/*resource "aws_instance" "nginx" {
+resource "aws_instance" "nginx" {
   ami = "ami-089b5384aac360007"
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.securitygroupNGINX.id]
   key_name = "makentosh-key"
-  provisioner "remote-exec" {
+  tags = {
+    Name = "Nginx"
+    deskriptn = "server for deploy nginx with ansible"
+  }
+  /*provisioner "remote-exec" {
     inline = [
       "sudo yum -y update",
       "sudo amazon-linux-extras install -y nginx1",
@@ -40,8 +44,8 @@ resource "aws_instance" "ansible-master" {
     host = self.public_ip
     user = "ec2-user"
     private_key = var.aws_private_key
-  }
-}*/
+  }*/
+}
 resource "aws_security_group" "securitygroupNGINX" {
   name = "Security Group for NGINX(ansible)"
   ingress {
