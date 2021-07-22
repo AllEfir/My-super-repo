@@ -1,2 +1,2 @@
 [prod_server]
-nginx1 ansible_host=54.93.232.73
+nginx1 ansible_host=
