@@ -1,7 +1,7 @@
 provider "aws" {
   region = var.region
 }
-resource "aws_instance" "ansible-master" {
+/*resource "aws_instance" "ansible-master" {
   ami = "ami-089b5384aac360007"
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.securitygroupNGINX.id]
@@ -21,7 +21,7 @@ resource "aws_instance" "ansible-master" {
     user = "ec2-user"
     private_key = var.aws_private_key
   }
-}
+}*/
 resource "aws_instance" "nginx" {
   ami = "ami-089b5384aac360007"
   instance_type = "t2.micro"
