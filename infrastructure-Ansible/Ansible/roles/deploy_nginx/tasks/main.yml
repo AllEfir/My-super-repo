@@ -1,0 +1,57 @@
+---
+# tasks file for deploy_nginx
+    - name: check and print LINUX version
+      debug: var=ansible_os_family
+
+    - block:
+
+       - name: install epel for amazon-linux
+         shell: amazon-linux-extras install epel -y|
+                yum-config-manager --enable epel
+
+       - name: install nginx for amazon-linux
+         yum: name=nginx state=present
+
+       - name: service for nginx
+         service: name=nginx state=started enabled=yes
+
+       - name: install git
+         yum: name=git state=present
+
+       - name: deploy site git
+         git:
+           repo: 'https://github.com/AllEfir/files.git'
+           dest: /home/files/
+
+       - name: copy conf.file nginx
+         copy:
+           src: /home/makentosh/Desktop/nginx.conf
+           dest: /etc/nginx/
+         notify: Restart Nginx
+
+      when: ansible_os_family == "RedHat"
+
+    - block:
+
+       - name: install nginx fot debian
+         apt: name=nginx state=present
+
+       - name: service for nginx
+         service: name=nginx state=started enabled=yes
+
+       - name: install git
+         yum: name=git state=present
+
+       - name: deploy site git
+         git:
+           repo: 'https://github.com/AllEfir/files.git'
+           dest: /home/files/
+
+       - name: copy conf.file nginx
+         copy:
+           src: /home/makentosh/Desktop/nginx.conf
+           dest: /etc/nginx/
+
+         notify: Restart Nginx
+
+      when: ansible_os_family == "Debian"

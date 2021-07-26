@@ -1,0 +1,7 @@
+---
+- name: Install Nginx in prod server
+  hosts: all
+  become: yes
+
+  roles: 
+     - { role: deploy_nginx, when: ansible_system == 'Linux' }
