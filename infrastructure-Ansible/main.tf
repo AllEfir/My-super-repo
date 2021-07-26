@@ -4,7 +4,7 @@ provider "aws" {
 /*resource "aws_instance" "ansible-master" {
   ami = "ami-089b5384aac360007"
   instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.securitygroupNGINX.id]
+  vpc_security_group_ids = [aws_security_group.securitygroupAnsible-client.id]
   key_name = "makentosh-key"
   provisioner "remote-exec" {
     inline = [
@@ -22,14 +22,14 @@ provider "aws" {
     private_key = var.aws_private_key
   }
 }*/
-resource "aws_instance" "nginx" {
+resource "aws_instance" "ansible-client" {
   ami = "ami-089b5384aac360007"
   instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.securitygroupNGINX.id]
+  vpc_security_group_ids = [aws_security_group.securitygroupAnsible-client.id]
   key_name = "makentosh-key"
   tags = {
-    Name = "Nginx"
-    deskriptn = "server for deploy nginx with ansible"
+    Name = "ansible-client"
+    deskriptn = "server for deploy  with ansible"
   }
   /*provisioner "remote-exec" {
     inline = [
@@ -46,12 +46,19 @@ resource "aws_instance" "nginx" {
     private_key = var.aws_private_key
   }*/
 }
-resource "aws_security_group" "securitygroupNGINX" {
-  name = "Security Group for NGINX(ansible)"
+resource "aws_security_group" "securitygroupAnsible-client" {
+  name = "Security Group for ansible-client"
   ingress {
     description      = "HTTP"
     from_port        = 80
     to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+  ingress {
+    description      = "HTTP2"
+    from_port        = 8080
+    to_port          = 8080
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
