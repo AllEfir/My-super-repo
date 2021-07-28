@@ -1,6 +1,6 @@
 ---
 - name: install jenkins
-  hosts: all
+  hosts: slave
   become: yes
   
   roles:
