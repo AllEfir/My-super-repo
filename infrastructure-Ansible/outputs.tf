@@ -13,3 +13,9 @@ output "ip-ansible-client-public-ip" {
 output "id-security-group-for-ansible-client" {
   value = aws_security_group.securitygroupAnsible-client.id
 }
+output "ip-ansible-client-test-public-ip" {
+  value = aws_instance.ansible-client-test.public_ip
+}
+output "ip-ansible-client-prod-public-ip" {
+  value = aws_instance.ansible-client-prod.public_ip
+}

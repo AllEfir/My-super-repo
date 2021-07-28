@@ -1,0 +1,15 @@
+---
+# tasks file for deploy_jenkins
+ - name: Install java-openjdk11 and add jenkins repo
+      shell: amazon-linux-extras install java-openjdk11 -y|
+             wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkin>
+             rpm --import https://pkg.jenkins.io/redhat-stable/jenkin>
+
+    - name: Install Jenkins
+      yum: name=jenkins state=present
+
+    - name: just force systemd to reread configs
+      systemd: daemon_reload=yes
+
+    - name: Start Jenkins
+      service: name=jenkins state=started
