@@ -46,7 +46,7 @@ resource "aws_instance" "ansible-client" {
     private_key = var.aws_private_key
   }*/
 }
-resource "aws_instance" "ansible-client-test" {
+/*resource "aws_instance" "ansible-client-test" {
   ami = "ami-089b5384aac360007"
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.securitygroupAnsible-client.id]
@@ -67,7 +67,7 @@ resource "aws_instance" "ansible-client-prod" {
     deskriptn = "server for deploy  with ansible"
     env = "prod"
   }
-}
+}*/
 
 resource "aws_security_group" "securitygroupAnsible-client" {
   name = "Security Group for ansible-client"
