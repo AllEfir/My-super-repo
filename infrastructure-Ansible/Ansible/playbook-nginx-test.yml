@@ -1,6 +1,6 @@
 ---
 - name: Install Nginx in prod server
-  hosts: nginx
+  hosts: test_server
   become: yes
 
   roles: 
