@@ -1,5 +1,5 @@
 [prod_server]
-nginx1 ansible_host=3.64.63.233 owner=Mykyta
+nginx1 ansible_host=3.121.200.211 owner=Mykyta
 [slave]
 prod ansible_host=3.121.127.150 owner=Mykyta
 test ansible_host=3.66.229.121 owner=Mykyta
