@@ -1,0 +1,16 @@
+---
+- name: Install redis 
+  hosts: test_server
+  become: yes
+
+  tasks:
+    - name: install epel
+      shell: amazon-linux-extras install epel -y|
+             yum-config-manager --enable epel
+
+    - name: install redis
+      yum: name=redis state=present
+
+    - name: service for redis
+      service: name=redis state=started enabled=yes
+

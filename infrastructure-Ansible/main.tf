@@ -70,6 +70,13 @@ resource "aws_instance" "test-server" {
 resource "aws_security_group" "securitygroupAnsible-client" {
   name = "Security Group for ansible-client"
   ingress {
+    description = "redis"
+    from_port = 6379
+    protocol = "tcp"
+    to_port = 6379
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
     description      = "HTTP"
     from_port        = 80
     to_port          = 80
