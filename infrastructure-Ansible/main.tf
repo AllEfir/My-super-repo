@@ -46,17 +46,17 @@ resource "aws_instance" "ansible-client" {
     private_key = var.aws_private_key
   }*/
 }
-/*resource "aws_instance" "test-server" {
+resource "aws_instance" "test-server" {
   ami = "ami-089b5384aac360007"
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.securitygroupAnsible-client.id]
   key_name = "makentosh-key"
   tags = {
-    Name = "jenkins-test-server"
-    deskriptn = "server for deploy  with jenkins"
+    Name = "test-server-redis"
+    deskriptn = "server for deploy "
   }
 }
-resource "aws_instance" "jenkins-slave-2" {
+/*resource "aws_instance" "jenkins-slave-2" {
   ami = "ami-089b5384aac360007"
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.securitygroupAnsible-client.id]
