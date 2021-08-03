@@ -1,5 +1,5 @@
 [jenkins]
 jenkins-server ansible_host=3.121.200.211 owner=Mykyta
 [test_server]
-test ansible_host=35.158.99.156 owner=Mykyta
+test ansible_host=3.121.188.66 owner=Mykyta
 
