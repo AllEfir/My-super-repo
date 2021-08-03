@@ -7,6 +7,6 @@ output "ip-ansible-client-public-ip" {
 output "id-security-group-for-ansible-client" {
   value = aws_security_group.securitygroupAnsible-client.id
 }
-output "ip-jenkins-test" {
+/*output "ip-jenkins-test" {
   value = aws_instance.test-server.public_ip
-}
+}*/
