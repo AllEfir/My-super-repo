@@ -2,7 +2,16 @@
 - name: Install redis 
   hosts: test_server
   become: yes
-
+  
+  vars: 
+    passWW: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          34366162393965663738356538623831623866333732323331666336313131613035363338363662
+          3366636333663230386462623063623339613334643634380a323234663163363233343934353264
+          39363434326634633631393536616561323738306532373862623830633665326530366665316534
+          3961356365316364640a356463373361343962396438323336393838323036366334316362343837
+          3238
+  
   tasks:
     - name: install epel
       shell: amazon-linux-extras install epel -y|
@@ -14,3 +23,14 @@
     - name: service for redis
       service: name=redis state=started enabled=yes
 
+    - name: secure redis
+      lineinfile: 
+        dest: /etc/redis.conf
+        regexp: '^# requirepass \w*$'
+        line: 'requirepass {{ passWW }}'
+        state: present
+      notify: Restart redis
+
+  handlers:
+    - name: Restart redis
+      service: name=redis state=restarted
